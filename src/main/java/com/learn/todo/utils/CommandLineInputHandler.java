@@ -22,11 +22,9 @@ public class CommandLineInputHandler {
     }
 
     public String readInput() {
-/*
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-*/
-        return System.console().readLine("> ");
+//        return System.console().readLine("> ");
     }
 
     public void processInput(CommandLineInput input) {
