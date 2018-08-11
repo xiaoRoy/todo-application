@@ -5,7 +5,7 @@ import com.learn.todo.utils.CommandLineInputHandler;
 
 public class TodoApplication {
 
-    public static final char DEFAULT_INPUT = '\u0000';
+    private static final char DEFAULT_INPUT = '\u0000';
 
     public static void main(String[] args) {
         CommandLineInputHandler commandLineInputHandler = new CommandLineInputHandler();
