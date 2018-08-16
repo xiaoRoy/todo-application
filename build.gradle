@@ -1,7 +1,6 @@
-import org.gradle.api.tasks.wrapper.*
 apply plugin: 'java'
 
-version = 0.1
+version = "$project.major.$project.minor"
 sourceCompatibility = 1.8
 
 repositories {
@@ -27,10 +26,29 @@ sourceSets {
     }
 }
 
+project.ext.what = 'what'
+
 ext {
+    where = 'where'
+}
+
+task assertExtraProperties  {
+    doLast{
+        assert what == 'what'
+        assert project.what == 'what'
+        assert where == 'where'
+        assert project.ext.where == 'where'
+    }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = project.gradleVersion
+    gradleVersion = '4.5.1'
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
+}
+
+task printGradleProperties{
+    doLast{
+        println "MajorVersion:$major"
+        println "MinorVersion:$project.minor"
+    }
 }
