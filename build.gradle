@@ -52,3 +52,9 @@ task printGradleProperties{
         println "MinorVersion:$project.minor"
     }
 }
+
+task showVersion(group: 'versioning', description: 'show project version'){
+    doLast {
+        logger.quiet "Version: $version"
+    }
+}
