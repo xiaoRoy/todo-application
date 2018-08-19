@@ -66,21 +66,34 @@ task first(group: project.groupLearnGradle) {
     }
 }
 
-task second(group: groupLearnGradle){
-    doLast{
+task second(group: groupLearnGradle) {
+    doLast {
         println 'second step'
     }
 }
 
-task showVersionWithDependency(group: 'version info', dependsOn:[second, first]){
+task showVersionWithDependency(group: 'version info', dependsOn: [second, first]) {
     doLast {
         logger.quiet "Version: $version"
     }
 }
 
 task third(group: groupLearnGradle) {
-    doLast{
+    doLast {
         println "third"
     }
 }
 third.dependsOn 'showVersionWithDependency'
+
+task setup(group: groupLearnGradle) {
+    doLast {
+        println 'setup'
+    }
+}
+
+task cleanup(group: groupLearnGradle) {
+    doLast {
+        println 'setup'
+    }
+}
+setup.finalizedBy cleanup
