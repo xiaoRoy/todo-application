@@ -30,10 +30,11 @@ project.ext.what = 'what'
 
 ext {
     where = 'where'
+    groupLearnGradle = 'learning gradle'
 }
 
-task assertExtraProperties  {
-    doLast{
+task assertExtraProperties {
+    doLast {
         assert what == 'what'
         assert project.what == 'what'
         assert where == 'where'
@@ -46,15 +47,40 @@ task wrapper(type: Wrapper) {
     distributionUrl = "https://services.gradle.org/distributions/gradle-${gradleVersion}-all.zip"
 }
 
-task printGradleProperties{
-    doLast{
+task printGradleProperties {
+    doLast {
         println "MajorVersion:$major"
         println "MinorVersion:$project.minor"
     }
 }
 
-task showVersion(group: 'versioning', description: 'show project version'){
+task showVersion(group: 'version info', description: 'show project version') {
     doLast {
         logger.quiet "Version: $version"
     }
 }
+
+task first(group: project.groupLearnGradle) {
+    doLast {
+        println 'first step'
+    }
+}
+
+task second(group: groupLearnGradle){
+    doLast{
+        println 'second step'
+    }
+}
+
+task showVersionWithDependency(group: 'version info', dependsOn:[second, first]){
+    doLast {
+        logger.quiet "Version: $version"
+    }
+}
+
+task third(group: groupLearnGradle) {
+    doLast{
+        println "third"
+    }
+}
+third.dependsOn 'showVersionWithDependency'
