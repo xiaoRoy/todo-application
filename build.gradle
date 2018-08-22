@@ -1,6 +1,7 @@
+import com.learn.todo.build.ProjectVersion
 apply plugin: 'java'
 
-version = "$project.major.$project.minor"
+version = new ProjectVersion(0, 1)
 sourceCompatibility = 1.8
 
 repositories {
@@ -31,6 +32,7 @@ project.ext.what = 'what'
 ext {
     where = 'where'
     groupLearnGradle = 'learning gradle'
+    versionFile = file('version.properties')
 }
 
 task assertExtraProperties {
@@ -97,3 +99,19 @@ task cleanup(group: groupLearnGradle) {
     }
 }
 setup.finalizedBy cleanup
+
+task loadVersion(group: groupLearnGradle){
+    logger.quiet 'Reading the version file.'
+    if(!project.versionFile.exists()){
+        throw new GradleException("Require version file does not exist: $versionFile.canonicalFile")
+    }
+    Properties versionProperties = new Properties()
+    versionFile.withInputStream { stream ->
+        versionProperties.load(stream)
+    }
+    project.version = new ProjectVersion(
+            versionProperties.major.toInger(),
+            versionProperties.minor.toInger(),
+            versionProperties.release.toBoolean()
+    )
+}
