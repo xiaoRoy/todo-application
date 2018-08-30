@@ -1,4 +1,5 @@
 import com.learn.todo.build.ProjectVersion
+
 apply plugin: 'java'
 
 version = new ProjectVersion(0, 1)
@@ -62,6 +63,8 @@ task showVersion(group: 'version info', description: 'show project version') {
     }
 }
 
+showVersion.doFirst { println "Added Action" }
+
 task first(group: project.groupLearnGradle) {
     doLast {
         println 'first step'
@@ -100,9 +103,9 @@ task cleanup(group: groupLearnGradle) {
 }
 setup.finalizedBy cleanup
 
-task loadVersion(group: groupLearnGradle){
+task loadVersion(group: groupLearnGradle) {
     logger.quiet 'Reading the version file.'
-    if(!project.versionFile.exists()){
+    if (!project.versionFile.exists()) {
         throw new GradleException("Require version file does not exist: $versionFile.canonicalFile")
     }
     Properties versionProperties = new Properties()
