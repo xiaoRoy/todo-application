@@ -119,3 +119,14 @@ task loadVersion(group: groupLearnGradle) {
             versionProperties.release.toBoolean()
     )
 }
+
+task makeReleaseVersion(group: 'version info', description: 'Make project a release version'){
+    inputs.property('release', version.isRelease)
+    outputs.file versionFile
+    doLast{
+        version.isRelease = true
+        ant.propertyfile(file: versionFile){
+            entry(key: 'release', type: 'string', operation: '=', value: 'true')
+        }
+    }
+}
