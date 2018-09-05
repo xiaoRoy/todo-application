@@ -1,4 +1,5 @@
 import com.learn.todo.build.ProjectVersion
+import com.learn.todo.build.ReleaseVersionTask
 
 apply plugin: 'java'
 
@@ -129,4 +130,9 @@ task makeReleaseVersion(group: 'version info', description: 'Make project a rele
             entry(key: 'release', type: 'string', operation: '=', value: 'true')
         }
     }
+}
+
+task makeReleaseVersionWithCustomTask(type: ReleaseVersionTask){
+    isRelease = version.isRelease
+    versionFile = project.versionFile
 }
