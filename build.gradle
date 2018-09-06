@@ -136,3 +136,13 @@ task makeReleaseVersionWithCustomTask(type: ReleaseVersionTask){
     isRelease = version.isRelease
     versionFile = project.versionFile
 }
+
+task createDistribution(type: Zip, description: makeReleaseVersion){
+    from war.ouputs.files
+    from (sourceSets*.allSouce){
+        into 'src'
+    }
+    from(rootDir){
+        include versionFile.name
+    }
+}
