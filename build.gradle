@@ -1,7 +1,9 @@
 import com.learn.todo.build.ProjectVersion
 import com.learn.todo.build.ReleaseVersionTask
 
-apply plugin: 'java'
+plugins {
+    id 'war'
+}
 
 version = new ProjectVersion(0, 1)
 sourceCompatibility = 1.8
@@ -121,28 +123,28 @@ task loadVersion(group: groupLearnGradle) {
     )
 }
 
-task makeReleaseVersion(group: 'version info', description: 'Make project a release version'){
+task makeReleaseVersion(group: 'version info', description: 'Make project a release version') {
     inputs.property('release', version.isRelease)
     outputs.file versionFile
-    doLast{
+    doLast {
         version.isRelease = true
-        ant.propertyfile(file: versionFile){
+        ant.propertyfile(file: versionFile) {
             entry(key: 'release', type: 'string', operation: '=', value: 'true')
         }
     }
 }
 
-task makeReleaseVersionWithCustomTask(type: ReleaseVersionTask){
+task makeReleaseVersionWithCustomTask(type: ReleaseVersionTask) {
     isRelease = version.isRelease
     versionFile = project.versionFile
 }
 
-task createDistribution(type: Zip, description: makeReleaseVersion){
-    from war.ouputs.files
-    from (sourceSets*.allSouce){
+task createDistribution(type: Zip, description: makeReleaseVersion) {
+    from war.outputs.files
+    from(sourceSets*.allSource) {
         into 'src'
     }
-    from(rootDir){
+    from(rootDir) {
         include versionFile.name
     }
 }
