@@ -148,3 +148,15 @@ task createDistribution(type: Zip, description: makeReleaseVersion) {
         include versionFile.name
     }
 }
+
+task backupReleaseDistribution(type: Copy) {
+    from createDistribution.outputs.files
+    into "$buildDir/backup"
+}
+
+
+task release(dependsOn: backupReleaseDistribution) {
+    doLast {
+        logger.quiet 'Releasing the project...'
+    }
+}
