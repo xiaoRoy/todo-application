@@ -173,6 +173,12 @@ task incrementMajorVersion(group: 'version info', description: 'Increments proje
     }
 }
 
+
+/*
+* task('incrementMinorVersion') doLast {
+    ...
+}
+* */
 task incrementMinorVersion(group: 'version info', description: 'Increments projects minor version') {
     doLast {
         def currentVersion = version.toString()
@@ -183,4 +189,15 @@ task incrementMinorVersion(group: 'version info', description: 'Increments proje
             entry(key: 'minor', type: 'int', operation: '+', value: 1)
         }
     }
+}
+
+//TaskContainer
+tasks.addRule('Pattern: increment<Classifier>Version - Increment the project version classifier.'){
+    String taskName ->
+        if(taskName.startsWith('increment') && taskName.endsWith('Version')){
+            task(taskName) doLast {
+
+            }
+        }
+
 }
