@@ -173,7 +173,6 @@ task incrementMajorVersion(group: 'version info', description: 'Increments proje
     }
 }
 
-
 /*
 * task('incrementMinorVersion') doLast {
     ...
@@ -192,11 +191,29 @@ task incrementMinorVersion(group: 'version info', description: 'Increments proje
 }
 
 //TaskContainer
-tasks.addRule('Pattern: increment<Classifier>Version - Increment the project version classifier.'){
+tasks.addRule('Pattern: increment<Classifier>Version - Increment the project version classifier.') {
     String taskName ->
-        if(taskName.startsWith('increment') && taskName.endsWith('Version')){
+        String increment = 'increment'
+        String version = 'Version'
+        if (taskName.startsWith(increment) && taskName.endsWith(increment)) {
             task(taskName) doLast {
-
+                String classifier = (taskName - increment - version).toLowerCase()
+                String currentVersion = version.toString()
+                switch (classifier) {
+                    case 'major':
+                        ++version.major
+                        break
+                    case 'minor':
+                        ++version.minor
+                        break
+                    default:
+                        throw new GradleException("Invalid version type '$classifier'. Allowed types:['Major', 'Minor']")
+                }
+                String newVersion = version.toString()
+                logger.info("Increment $classifier project version: $currentVersion -> $newVersion")
+                ant.propertyfile(file: versionFile) {
+                    entry(key: classifier, type: 'int', operation: '+', value: 1)
+                }
             }
         }
 
