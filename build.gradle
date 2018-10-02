@@ -218,3 +218,12 @@ tasks.addRule('Pattern: increment<Classifier>Version - Increment the project ver
         }
 
 }
+
+gradle.taskGraph.whenReady { TaskExecutionGraph taskExecutionGraph ->
+    if (taskExecutionGraph.hasTask(release) && !version.isRelease) {
+        version.isRelease true
+        ant.propertyfile(file: versionFile) {
+            entry(key: 'isRelease', type: 'string', operation: '=', value: 'true')
+        }
+    }
+}
