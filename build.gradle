@@ -1,5 +1,6 @@
 import com.learn.todo.build.ProjectVersion
 import com.learn.todo.build.ReleaseVersionTask
+import com.learn.todo.build.ReleaseVersionListener
 
 plugins {
     id 'war'
@@ -227,3 +228,5 @@ gradle.taskGraph.whenReady { TaskExecutionGraph taskExecutionGraph ->
         }
     }
 }
+
+gradle.taskGraph.addTaskExecutionGraphListener(new ReleaseVersionListener())
