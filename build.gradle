@@ -45,6 +45,8 @@ ext {
     where = 'where'
     groupLearnGradle = 'learning gradle'
     versionFile = file('version.properties')
+    cargoGroup = 'org.codehaus.cargo'
+    cargoVersion = '1.6.10'
 }
 
 task assertExtraProperties {
@@ -254,4 +256,14 @@ task deployToTomcat {
         }
 
     }
+}
+
+
+/*
+* 5.4.2 External module dependencies
+* */
+
+dependencies {
+//    cargo group: cargoGroup, name: 'cargo-core-uberjar', version: cargoVersion
+//    cargo "$cargoGroup:cargo-ant:$cargoVersion"
 }
