@@ -252,12 +252,11 @@ task deployToTomcat {
             configuration {
                 deployable(type: 'war', file: 'todo.war')
             }
-            zipUrlInstaller(installUrl:'http://mirrors.shu.edu.cn/apache/tomcat/tomcat-7/v7.0.91/bin/apache-tomcat-7.0.91-deployer.zip')
+            zipUrlInstaller(installUrl: 'http://mirrors.shu.edu.cn/apache/tomcat/tomcat-7/v7.0.91/bin/apache-tomcat-7.0.91-deployer.zip')
         }
 
     }
 }
-
 
 /*
 * 5.4.2 External module dependencies
@@ -265,5 +264,8 @@ task deployToTomcat {
 
 dependencies {
 //    cargo group: cargoGroup, name: 'cargo-core-uberjar', version: cargoVersion
-//    cargo "$cargoGroup:cargo-ant:$cargoVersion"
+    cargo("$cargoGroup:cargo-ant:$cargoVersion") {
+        //module is name 
+        exclude group: 'xml-apis', module: 'xml-apis'
+    }
 }
