@@ -269,3 +269,15 @@ dependencies {
         exclude group: 'xml-apis', module: 'xml-apis'
     }
 }
+
+
+/*
+* 5.6.1 Analyzing the cache structure
+* */
+task printCargoDependencies {
+    doLast {
+        configurations.getByName('cargo').each {
+            println it
+        }
+    }
+}
