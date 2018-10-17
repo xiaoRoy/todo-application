@@ -1,3 +1,14 @@
+allprojects {
+    group = 'com.learn.gradle'
+    version = '0.1'
+}
+
+subprojects {
+    apply plugin: 'java'
+}
+
+
+/*
 import com.learn.todo.build.ProjectVersion
 import com.learn.todo.build.ReleaseVersionTask
 import com.learn.todo.build.ReleaseVersionListener
@@ -183,11 +194,13 @@ task incrementMajorVersion(group: 'version info', description: 'Increments proje
     }
 }
 
+*/
 /*
 * task('incrementMinorVersion') doLast {
     ...
 }
-* */
+* *//*
+
 task incrementMinorVersion(group: 'version info', description: 'Increments projects minor version') {
     doLast {
         def currentVersion = version.toString()
@@ -240,9 +253,11 @@ gradle.taskGraph.whenReady { TaskExecutionGraph taskExecutionGraph ->
 
 gradle.taskGraph.addTaskExecutionGraphListener(new ReleaseVersionListener())
 
+*/
 /*
 * 5.3.3 Accessing a configuration
-* */
+* *//*
+
 
 task deployToTomcat {
     doLast {
@@ -258,22 +273,28 @@ task deployToTomcat {
     }
 }
 
+*/
 /*
 * 5.4.2 External module dependencies
-* */
+* *//*
+
 
 dependencies {
 //    cargo group: cargoGroup, name: 'cargo-core-uberjar', version: cargoVersion
-    /*cargo("$cargoGroup:cargo-ant:$cargoVersion") {
+    */
+/*cargo("$cargoGroup:cargo-ant:$cargoVersion") {
         //module is name 
         exclude group: 'xml-apis', module: 'xml-apis'
-    }*/
+    }*//*
+
 }
 
 
+*/
 /*
 * 5.6.1 Analyzing the cache structure
-* */
+* *//*
+
 task printCargoDependencies {
     doLast {
         configurations.getByName('cargo').each {
@@ -281,3 +302,4 @@ task printCargoDependencies {
         }
     }
 }
+*/
