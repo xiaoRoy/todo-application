@@ -1,12 +1,39 @@
-allprojects {
+/*allprojects {
     group = 'com.learn.gradle'
     version = '0.1'
 }
 
 subprojects {
     apply plugin: 'java'
+}*/
+
+
+ext {
+    projectIds = ['group': 'com.learn.todo', 'version': '0.1']
 }
 
+group = project.projectIds.group
+version = project.projectIds.version
+
+project(':model') {
+    apply plugin: 'java'
+    group rootProject.projectIds.group
+    version rootProject.projectIds.version
+}
+
+project(':repository') {
+    apply plugin: 'java'
+    group rootProject.projectIds.group
+    version rootProject.projectIds.version
+}
+
+project(':web') {
+    group rootProject.projectIds.group
+    version rootProject.projectIds.version
+    repositories {
+        mavenCentral()
+    }
+}
 
 /*
 import com.learn.todo.build.ProjectVersion
