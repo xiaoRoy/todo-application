@@ -25,13 +25,21 @@ project(':repository') {
     apply plugin: 'java'
     group rootProject.projectIds.group
     version rootProject.projectIds.version
+    dependencies {
+        compile project(':model')
+    }
 }
 
 project(':web') {
+    apply plugin: 'java'
     group rootProject.projectIds.group
     version rootProject.projectIds.version
     repositories {
         mavenCentral()
+    }
+
+    dependencies {
+        compile project(':repository')
     }
 }
 
