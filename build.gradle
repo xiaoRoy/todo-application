@@ -15,10 +15,21 @@ ext {
 group = project.projectIds.group
 version = project.projectIds.version
 
+task hello {
+    doLast {
+        println "Hello from $project.name"
+    }
+}
+
 project(':model') {
     apply plugin: 'java'
     group rootProject.projectIds.group
     version rootProject.projectIds.version
+    task hello {
+        doLast {
+            println "Hello from $project.name"
+        }
+    }
 }
 
 project(':repository') {
@@ -27,6 +38,11 @@ project(':repository') {
     version rootProject.projectIds.version
     dependencies {
         compile project(':model')
+    }
+    task hello {
+        doLast {
+            println "Hello from $project.name"
+        }
     }
 }
 
@@ -40,6 +56,12 @@ project(':web') {
 
     dependencies {
         compile project(':repository')
+    }
+
+    task hello {
+        doLast {
+            println "Hello from $project.name"
+        }
     }
 }
 
