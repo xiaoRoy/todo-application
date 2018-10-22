@@ -25,7 +25,7 @@ project(':model') {
     apply plugin: 'java'
     group rootProject.projectIds.group
     version rootProject.projectIds.version
-    task hello {
+    task hello(dependsOn: ':repository:hello') {
         doLast {
             println "Hello from $project.name"
         }
