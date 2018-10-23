@@ -12,8 +12,14 @@ ext {
     projectIds = ['group': 'com.learn.todo', 'version': '0.1']
 }
 
-group = project.projectIds.group
-version = project.projectIds.version
+allprojects {
+    group = 'com.learn.todo'
+    version = '0.11'
+}
+
+subprojects {
+    apply plugin: 'java'
+}
 
 task hello {
     doLast {
@@ -22,9 +28,6 @@ task hello {
 }
 
 project(':model') {
-    apply plugin: 'java'
-    group rootProject.projectIds.group
-    version rootProject.projectIds.version
     task hello(dependsOn: ':repository:hello') {
         doLast {
             println "Hello from $project.name"
@@ -33,9 +36,6 @@ project(':model') {
 }
 
 project(':repository') {
-    apply plugin: 'java'
-    group rootProject.projectIds.group
-    version rootProject.projectIds.version
     dependencies {
         compile project(':model')
     }
@@ -47,9 +47,6 @@ project(':repository') {
 }
 
 project(':web') {
-    apply plugin: 'java'
-    group rootProject.projectIds.group
-    version rootProject.projectIds.version
     repositories {
         mavenCentral()
     }
