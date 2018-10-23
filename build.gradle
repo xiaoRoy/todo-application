@@ -21,7 +21,7 @@ subprojects {
     apply plugin: 'java'
 }
 
-task hello {
+/*task hello {
     doLast {
         println "Hello from $project.name"
     }
@@ -60,7 +60,7 @@ project(':web') {
             println "Hello from $project.name"
         }
     }
-}
+}*/
 
 /*
 import com.learn.todo.build.ProjectVersion
